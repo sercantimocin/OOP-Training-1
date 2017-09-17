@@ -2,95 +2,59 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Reflection;
 
-    /// <summary>
-    /// The extensions.
-    /// </summary>
+    using MainApp.Command;
+
     public static class Extensions
     {
-        /// <summary>
-        /// To the rower letter.
-        /// </summary>
-        /// <param name="rowerLetters">The rower letters.</param>
-        /// <returns>RowerLetter list</returns>
-        public static List<RowerLetter> ToRowerLetters(this string rowerLetters)
+        public static List<RowerCommand> ToRowerCommands(this string rowerLetters, IRower rower,Strategy strategy)
         {
-            List<RowerLetter> resultRowerLetters = new List<RowerLetter>();
+            List<RowerCommand> comands = new List<RowerCommand>();
 
             foreach (char rowerLetter in rowerLetters)
             {
                 switch (rowerLetter)
                 {
                     case 'M':
-                        resultRowerLetters.Add(RowerLetter.Move);
+                        comands.Add(new MoveCommand(rower, strategy));
                         break;
                     case 'L':
-                        resultRowerLetters.Add(RowerLetter.Left);
+                        comands.Add(new TurnLeftCommand(rower));
                         break;
                     case 'R':
-                        resultRowerLetters.Add(RowerLetter.Right);
+                        comands.Add(new TurnRightCommand(rower));
                         break;
+                    default:
+                        throw new ArgumentOutOfRangeException("Rower command is invalid");
                 }
             }
 
-            return resultRowerLetters;
+            return comands;
         }
 
-        /// <summary>
-        /// To the rower direction.
-        /// </summary>
-        /// <param name="rowerDirection">The rower direction.</param>
-        /// <returns>Direction</returns>
-        public static Direction ToRowerDirection(this string rowerDirection)
+        public static IDirectionState ToDirectionState(this string rowerDirection)
         {
-            Direction resultRowerDirection = Direction.Unknown;
+            IDirectionState resultRowerDirection = null;
 
             switch (rowerDirection)
-                {
-                    case "N":
-                        resultRowerDirection = Direction.North;
-                        break;
-                    case "S":
-                        resultRowerDirection = Direction.South;
-                        break;
-                    case "W":
-                        resultRowerDirection = Direction.West;
-                        break;
-                    case "E":
-                        resultRowerDirection = Direction.East;
-                        break;
-                }
+            {
+                case "N":
+                    resultRowerDirection = new North();
+                    break;
+                case "S":
+                    resultRowerDirection = new South();
+                    break;
+                case "W":
+                    resultRowerDirection = new West();
+                    break;
+                case "E":
+                    resultRowerDirection = new East();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("Rower direction is invalid");
+            }
 
             return resultRowerDirection;
-
-        }
-
-        /// <summary>
-        /// Gets the description.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>Description</returns>
-        public static string GetDescription(this Enum value)
-        {
-            Type type = value.GetType();
-            string name = Enum.GetName(type, value);
-            if (name != null)
-            {
-                FieldInfo field = type.GetField(name);
-                if (field != null)
-                {
-                    DescriptionAttribute attr =
-                           Attribute.GetCustomAttribute(field,
-                             typeof(DescriptionAttribute)) as DescriptionAttribute;
-                    if (attr != null)
-                    {
-                        return attr.Description;
-                    }
-                }
-            }
-            return null;
         }
     }
 }
