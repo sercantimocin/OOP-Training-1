@@ -2,7 +2,7 @@ namespace MainApp
 {
     using System;
 
-    public class West : IDirectionState
+    public class West : DirectionState
     {
         protected internal West() : base("W")
         {

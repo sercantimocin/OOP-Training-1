@@ -5,13 +5,13 @@
 
     public class MarsPlateau : IPlateau
     {
-        private readonly ISimpleCircularList<IRower> _rowerList;
+        private readonly ISimpleCircularList<IRower> rowerList;
 
         public MarsPlateau(int x, int y)
         {
             X = x;
             Y = y;
-            _rowerList = new SimpleCircularList<IRower>();
+            this.rowerList = new SimpleCircularList<IRower>();
         }
 
         public int X { get; set; }
@@ -22,7 +22,7 @@
         {
             get
             {
-                return _rowerList;
+                return this.rowerList;
             }
         }
     }

@@ -33,7 +33,7 @@
             return Plateau;
         }
 
-        public static IRower AddRower(int id,int x, int y, IDirectionState directionState)
+        public static IRower AddRower(int id,int x, int y, DirectionState directionState)
         {
             IRower resultRower = null;
 

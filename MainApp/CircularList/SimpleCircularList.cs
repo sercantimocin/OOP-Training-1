@@ -6,41 +6,41 @@
 
     public class SimpleCircularList<T> : List<T>, ISimpleCircularList<T>
     {
-        private readonly IList<T> _list;
+        private readonly IList<T> list;
 
-        private int _itemOrder;
+        private int itemOrder;
 
         private int ItemOrder
         {
             get
             {
-                return _itemOrder;
+                return this.itemOrder;
             }
             set
             {
-                _itemOrder = value;
+                this.itemOrder = value;
 
-                if (_list.Count != 0 && _itemOrder > _list.Count - 1)
+                if (this.list.Count != 0 && this.itemOrder > this.list.Count - 1)
                 {
-                    _itemOrder = _itemOrder % _list.Count;
+                    this.itemOrder = this.itemOrder % this.list.Count;
                 }
             }
         }
 
         public SimpleCircularList()
         {
-            _list = new List<T>();
+            this.list = new List<T>();
         }
 
         public void AddItem(T item)
         {
-            _list.Add(item);
+            this.list.Add(item);
             ItemOrder++;
         }
 
         public T IterateItem()
         {
-            var item = _list[ItemOrder];
+            var item = this.list[ItemOrder];
             ItemOrder++;
             return item;
         }

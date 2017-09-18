@@ -2,7 +2,7 @@ namespace MainApp
 {
     using System;
 
-    public class North : IDirectionState
+    public class North : DirectionState
     {
         public North() : base("N")
         {

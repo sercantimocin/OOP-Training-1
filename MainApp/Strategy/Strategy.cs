@@ -4,7 +4,7 @@
 
     public abstract class Strategy
     {
-        private int _stepValue;
+        private int stepValue;
 
         protected internal IPlateau Plateau;
 
@@ -12,14 +12,14 @@
         {
             get
             {
-                return _stepValue;
+                return this.stepValue;
             }
         }
 
         public Strategy(IPlateau plateau, int step)
         {
             this.Plateau = plateau;
-            _stepValue = step;
+            this.stepValue = step;
         }
 
         public abstract void Move(IRower rower);

@@ -2,7 +2,7 @@ namespace MainApp
 {
     using System;
 
-    public class South : IDirectionState
+    public class South : DirectionState
     {
 
         public South() : base("S")

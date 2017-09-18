@@ -16,7 +16,7 @@
 
             Console.WriteLine("At least add a rower to system");
             string[] rowerValues = Console.ReadLine().TrimEnd().ToUpper().Split(null);
-            Nasa.AddRower(GenerateId(), Convert.ToInt32(rowerValues[0]), Convert.ToInt32(rowerValues[1]), rowerValues[2].ToDirectionState());
+            Nasa.AddRower(GenerateId(), Convert.ToInt32(rowerValues[0]), Convert.ToInt32(rowerValues[1]), DirectionState.CreateCommand(rowerValues[2]));
 
             Console.WriteLine("Now you can add new rower or give command for rowers. If you want to exit please enter q");
             string input = string.Empty;
@@ -30,7 +30,12 @@
                 if (input.Any(char.IsDigit))
                 {
                     rowerValues = input.Split(null);
-                    lastAddedRower = Nasa.AddRower(GenerateId(), Convert.ToInt32(rowerValues[0]), Convert.ToInt32(rowerValues[1]), rowerValues[2].ToDirectionState());
+
+                    lastAddedRower = Nasa.AddRower(
+                        GenerateId(),
+                        Convert.ToInt32(rowerValues[0]),
+                        Convert.ToInt32(rowerValues[1]),
+                        DirectionState.CreateCommand(rowerValues[2]));
                 }
                 else
                 {

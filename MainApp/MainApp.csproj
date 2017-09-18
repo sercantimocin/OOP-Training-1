@@ -52,7 +52,7 @@
     <Compile Include="Models\IMap.cs" />
     <Compile Include="Models\IRower.cs" />
     <Compile Include="State\East.cs" />
-    <Compile Include="State\IState.cs" />
+    <Compile Include="State\DirectionState.cs" />
     <Compile Include="Models\MarsMap.cs" />
     <Compile Include="Strategy\MoveOneStepStrategy.cs" />
     <Compile Include="Models\Nasa.cs" />

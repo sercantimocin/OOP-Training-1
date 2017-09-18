@@ -8,7 +8,7 @@
 
         void TurnRight();
 
-        void ChangeState(IDirectionState state);
+        void ChangeState(DirectionState state);
 
         int Id { get; }
     }

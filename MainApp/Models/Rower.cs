@@ -6,9 +6,9 @@
     {
         private int id;
 
-        private IDirectionState state;
+        private DirectionState state;
 
-        public Rower(int id, int x, int y, IDirectionState state)
+        public Rower(int id, int x, int y, DirectionState state)
         {
             this.X = x;
             this.Y = y;
@@ -20,7 +20,7 @@
 
         public int Y { get; set; }
 
-        public void ChangeState(IDirectionState state)
+        public void ChangeState(DirectionState state)
         {
             this.state = state;
         }
@@ -39,18 +39,12 @@
             Console.WriteLine("Rower State {0} {1} {2} {3}", Id, X, Y, this.state);
         }
 
-        /// <summary>
-        /// Turns the left.
-        /// </summary>
         public void TurnLeft()
         {
             this.state.Left(this);
             Console.WriteLine("Rower Turned Left Id : {0}", Id);
         }
 
-        /// <summary>
-        /// Turns the left.
-        /// </summary>
         public void TurnRight()
         {
             this.state.Right(this);
