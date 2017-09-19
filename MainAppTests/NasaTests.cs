@@ -34,7 +34,7 @@
         }
 
         [TestCase("LMRRRM")]
-        public void when_call_ExecuteCommands_LMM_is_12(string commandText)
+        public void when_call_ExecuteCommands_is_12(string commandText)
         {
             var rower = new Rower(1, 2, 3, new North());
             var plateau = new MarsPlateau(5, 5);
