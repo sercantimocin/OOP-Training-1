@@ -17,13 +17,13 @@
 
             Console.WriteLine("Now you can add new rower. If you want to show results please enter q");
 
-            GetRowersInput(nasa, strategy);
+            ProcessInputs(nasa, strategy);
             nasa.DisplayRowers();
 
             Console.ReadKey();
         }
 
-        private static void GetRowersInput(Nasa nasa, Strategy strategy)
+        private static void ProcessInputs(Nasa nasa, Strategy strategy)
         {
             while (true)
             {
