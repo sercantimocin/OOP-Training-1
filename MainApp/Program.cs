@@ -11,28 +11,28 @@
             string[] mapCoordinates = Console.ReadLine().TrimEnd().Split(null);
             int[] coordinates = Array.ConvertAll(mapCoordinates, int.Parse);
 
-            var platau = new MarsPlateau(coordinates[0], coordinates[1]);
-            var nasa = new Nasa(platau);
-
+            MarsPlateau platau = new MarsPlateau(coordinates[0], coordinates[1]);
+            Nasa nasa = new Nasa(platau);
             Strategy strategy = new Strategy(platau, 1);
 
             Console.WriteLine("Now you can add new rower. If you want to show results please enter q");
-            string input = string.Empty;
 
+            GetRowersInput(nasa, strategy);
+            nasa.DisplayRowers();
 
+            Console.ReadKey();
+        }
+
+        private static void GetRowersInput(Nasa nasa, Strategy strategy)
+        {
             while (true)
             {
-                input = Console.ReadLine().TrimEnd().ToUpper();
+                string input = Console.ReadLine().TrimEnd().ToUpper();
 
                 if (input.Any(char.IsDigit))
                 {
                     string[] rowerValues = input.Split(null);
-
-                    nasa.AddRower(
-                        GenerateId(),
-                        Convert.ToInt32(rowerValues[0]),
-                        Convert.ToInt32(rowerValues[1]),
-                        DirectionState.CreateCommand(rowerValues[2]));
+                    nasa.AddRower(GenerateId(), Convert.ToInt32(rowerValues[0]), Convert.ToInt32(rowerValues[1]), DirectionState.CreateCommand(rowerValues[2]));
                 }
                 else if (!input.ToUpperInvariant().Equals("Q"))
                 {
@@ -43,10 +43,6 @@
                     break;
                 }
             }
-
-
-            nasa.DisplayRowers();
-            Console.ReadKey();
         }
 
         private static int GenerateId()
