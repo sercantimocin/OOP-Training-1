@@ -1,8 +1,8 @@
 ﻿namespace MainApp.Command
 {
-    class TurnLeftCommand : RowerCommand
+    public class LeftCommand : RowerCommand
     {
-        public TurnLeftCommand(IRower rower)
+        public LeftCommand(IRower rower)
             : base(rower)
         {
         }

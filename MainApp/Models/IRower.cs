@@ -2,6 +2,8 @@
 {
     public interface IRower : ICoordinate
     {
+        int Id { get; }
+
         void Move(Strategy strategy);
 
         void TurnLeft();
@@ -10,6 +12,6 @@
 
         void ChangeState(DirectionState state);
 
-        int Id { get; }
+        void GetStatus();
     }
 }

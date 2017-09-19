@@ -4,7 +4,7 @@ namespace MainApp
 
     public class West : DirectionState
     {
-        protected internal West() : base("W")
+        public West() : base("W")
         {
         }
 

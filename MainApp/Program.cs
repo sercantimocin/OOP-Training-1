@@ -10,28 +10,25 @@
             Console.WriteLine("Please Enter Map Coordinate");
             string[] mapCoordinates = Console.ReadLine().TrimEnd().Split(null);
             int[] coordinates = Array.ConvertAll(mapCoordinates, int.Parse);
-            Nasa.CreateMap(coordinates[0], coordinates[1]);
 
-            Strategy strategy = new MoveOneStepStrategy(Nasa.GetPlateau);
+            var platau = new MarsPlateau(coordinates[0], coordinates[1]);
+            var nasa = new Nasa(platau);
 
-            Console.WriteLine("At least add a rower to system");
-            string[] rowerValues = Console.ReadLine().TrimEnd().ToUpper().Split(null);
-            Nasa.AddRower(GenerateId(), Convert.ToInt32(rowerValues[0]), Convert.ToInt32(rowerValues[1]), DirectionState.CreateCommand(rowerValues[2]));
+            Strategy strategy = new Strategy(platau, 1);
 
-            Console.WriteLine("Now you can add new rower or give command for rowers. If you want to exit please enter q");
+            Console.WriteLine("Now you can add new rower. If you want to show results please enter ");
             string input = string.Empty;
-
-            IRower lastAddedRower = null;
 
             do
             {
+                IRower lastAddedRower = null;
                 input = Console.ReadLine().TrimEnd().ToUpper();
 
                 if (input.Any(char.IsDigit))
                 {
-                    rowerValues = input.Split(null);
+                    string[] rowerValues = input.Split(null);
 
-                    lastAddedRower = Nasa.AddRower(
+                    lastAddedRower = nasa.AddRower(
                         GenerateId(),
                         Convert.ToInt32(rowerValues[0]),
                         Convert.ToInt32(rowerValues[1]),
@@ -39,7 +36,7 @@
                 }
                 else
                 {
-                    Nasa.ExecuteCommands(input.ToRowerCommands(lastAddedRower, strategy));
+                    nasa.ExecuteCommands(input.ToRowerCommands(lastAddedRower, strategy));
                 }
             }
             while (!input.Equals("q"));

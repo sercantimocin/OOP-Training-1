@@ -19,17 +19,17 @@
 
         protected internal abstract void Move(IRower rower, Strategy strategy);
 
-        void ToString()
+        protected internal string GetName()
         {
-            Console.Write(this.stateName);
+            return this.stateName;
         }
 
         public static DirectionState CreateCommand(string stateChar)
         {
             Type type = Assembly.GetAssembly(typeof(DirectionState))
-                                .DefinedTypes
+                                .ExportedTypes
                                 .FirstOrDefault(x => x.IsClass
-                                                  && x.IsAssignableFrom(typeof(DirectionState))
+                                                  && x.IsSubclassOf(typeof(DirectionState))
                                                   && x.Name.StartsWith(stateChar.ToUpper()));
 
             if (type == null)

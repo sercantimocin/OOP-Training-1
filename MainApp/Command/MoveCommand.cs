@@ -1,6 +1,6 @@
 ﻿namespace MainApp.Command
 {
-    class MoveCommand : RowerCommand
+    public class MoveCommand : RowerCommand
     {
         private readonly Strategy strategy;
 
@@ -12,7 +12,7 @@
 
         protected internal override void Apply()
         {
-            base.Rower.Move(strategy);
+            base.Rower.Move(this.strategy);
         }
     }
 }

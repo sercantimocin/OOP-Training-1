@@ -17,18 +17,28 @@
 
         public static RowerCommand CreateCommand(char commandChar, IRower rower, Strategy strategy)
         {
-            Type type = Assembly.GetAssembly(typeof(RowerCommand))
-                                .DefinedTypes
-                                .FirstOrDefault(x => x.IsClass
-                                                  && x.IsAssignableFrom(typeof(RowerCommand))
-                                                  && x.Name.StartsWith(commandChar.ToString().ToUpper()));
+            RowerCommand resultCommand = null;
 
-            if (type == null)
+            if (commandChar == 'L')
+            {
+                resultCommand = new LeftCommand(rower);
+            }
+            else if (commandChar == 'R')
+            {
+                resultCommand = new RightCommand(rower);
+            }
+            else if (commandChar == 'M')
+            {
+                resultCommand = new MoveCommand(rower, strategy);
+            }
+
+
+            if (resultCommand == null)
             {
                 throw new ArgumentOutOfRangeException("Invalid rower command");
             }
 
-            return (RowerCommand)Activator.CreateInstance(type, rower, strategy);
+            return resultCommand;
         }
     }
 }
