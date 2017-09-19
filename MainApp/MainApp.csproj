@@ -47,7 +47,6 @@
     <Compile Include="Command\RowerComand.cs" />
     <Compile Include="Command\LeftCommand.cs" />
     <Compile Include="Command\RightCommand.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="Models\ICoordinate.cs" />
     <Compile Include="Models\IMap.cs" />
     <Compile Include="Models\IRower.cs" />

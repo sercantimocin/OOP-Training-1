@@ -1,10 +1,8 @@
 ﻿namespace MainApp.Tests
 {
-    using System.Collections.Generic;
     using System.Linq;
 
     using MainApp.CircularLinkedList;
-    using MainApp.Command;
 
     using Moq;
 
@@ -28,35 +26,37 @@
         [Test]
         public void When_call_AddRower_success()
         {
-
-
-            var sut = nasa.AddRower(1, 6, 10, new South());
+            var sut = this.nasa.AddRower(1, 6, 10, new South());
 
             Assert.IsNotNull(this.mockPlatau.Object.RowerList);
             Assert.Greater(this.mockPlatau.Object.RowerList.Count(), 0);
             Assert.IsTrue(this.mockPlatau.Object.RowerList.Contains(sut));
         }
 
-        [Test()]
-        public void when_call_ExecuteCommands_LMM_is_12()
+        [TestCase("LMRRRM")]
+        public void when_call_ExecuteCommands_LMM_is_12(string commandText)
         {
             var rower = new Rower(1, 2, 3, new North());
-            var strategy = new Strategy(new MarsPlateau(5, 5), 1);
+            var plateau = new MarsPlateau(5, 5);
+            plateau.RowerList.AddItem(rower);
+            var strategy = new Strategy(plateau, 1);
+            var nasa =new Nasa(plateau);
 
-            var commands = new List<RowerCommand>()
-                               {
-                                   new LeftCommand(rower),
-                                   new MoveCommand(rower, strategy),
-                                   new RightCommand(rower),
-                                   new RightCommand(rower),
-                                   new RightCommand(rower),
-                                   new MoveCommand(rower, strategy)
-                               };
-
-            this.nasa.ExecuteCommands(commands);
+            nasa.ExecuteCommands(commandText, strategy);
 
             Assert.AreEqual(rower.X, 1);
             Assert.AreEqual(rower.Y, 2);
         }
     }
 }
+
+
+//var commands = new List<RowerCommand>()
+//                               {
+//                                   new LeftCommand(rower),
+//                                   new MoveCommand(rower, strategy),
+//                                   new RightCommand(rower),
+//                                   new RightCommand(rower),
+//                                   new RightCommand(rower),
+//                                   new MoveCommand(rower, strategy)
+//                               };

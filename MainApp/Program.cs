@@ -16,30 +16,37 @@
 
             Strategy strategy = new Strategy(platau, 1);
 
-            Console.WriteLine("Now you can add new rower. If you want to show results please enter ");
+            Console.WriteLine("Now you can add new rower. If you want to show results please enter q");
             string input = string.Empty;
 
-            do
+
+            while (true)
             {
-                IRower lastAddedRower = null;
                 input = Console.ReadLine().TrimEnd().ToUpper();
 
                 if (input.Any(char.IsDigit))
                 {
                     string[] rowerValues = input.Split(null);
 
-                    lastAddedRower = nasa.AddRower(
+                    nasa.AddRower(
                         GenerateId(),
                         Convert.ToInt32(rowerValues[0]),
                         Convert.ToInt32(rowerValues[1]),
                         DirectionState.CreateCommand(rowerValues[2]));
                 }
+                else if (!input.ToUpperInvariant().Equals("Q"))
+                {
+                    nasa.ExecuteCommands(input, strategy);
+                }
                 else
                 {
-                    nasa.ExecuteCommands(input.ToRowerCommands(lastAddedRower, strategy));
+                    break;
                 }
             }
-            while (!input.Equals("q"));
+
+
+            nasa.DisplayRowers();
+            Console.ReadKey();
         }
 
         private static int GenerateId()

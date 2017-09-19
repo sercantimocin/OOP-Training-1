@@ -15,7 +15,7 @@
             this.plateau = plateau;
         }
 
-        public IRower AddRower(int id,int x, int y, DirectionState directionState)
+        public IRower AddRower(int id, int x, int y, DirectionState directionState)
         {
             IRower resultRower = null;
 
@@ -33,9 +33,23 @@
             return resultRower;
         }
 
-        public void ExecuteCommands(List<RowerCommand> commands)
+        private List<RowerCommand> ConvertToRowerCommands(string rowerLetters, IRower rower, Strategy strategy)
         {
-            commands.ForEach(x => x.Apply());
+            return rowerLetters.Select(rowerLetter => RowerCommand.CreateCommand(rowerLetter, rower, strategy)).ToList();
+        }
+
+        public void ExecuteCommands(string commands, Strategy strategy)
+        {
+            var orderedtRower = this.plateau.RowerList.GetOrderedItem();
+
+            var rowerCommands = this.ConvertToRowerCommands(commands, orderedtRower, strategy);
+
+            rowerCommands.ForEach(x => x.Apply());
+        }
+
+        public void DisplayRowers()
+        {
+            this.plateau.RowerList.ToList().ForEach(x => x.GetStatus());
         }
     }
 }

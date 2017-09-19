@@ -1,5 +1,6 @@
 ﻿namespace MainApp.CircularLinkedList
 {
+    using System;
     using System.Collections.Generic;
 
     using MainApp.CircularList;
@@ -12,29 +13,30 @@
         {
             get
             {
-                return this.itemOrder;
-            }
-            set
-            {
-                this.itemOrder = value;
-
-                if (this.Count != 0 && this.itemOrder > this.Count - 1)
+                if (this.itemOrder > this.Count - 1)
                 {
                     this.itemOrder = this.itemOrder % this.Count;
                 }
+
+                return this.itemOrder;
             }
         }
 
         public void AddItem(T item)
         {
             this.Add(item);
-            ItemOrder++;
         }
 
-        public T IterateItem()
+        public T GetOrderedItem()
         {
-            var item = this[ItemOrder];
-            ItemOrder++;
+            if (this.Count == 0)
+            {
+                throw new ArgumentNullException("There is no rower");
+            }
+
+            var item = this[this.ItemOrder];
+            this.itemOrder++;
+
             return item;
         }
     }

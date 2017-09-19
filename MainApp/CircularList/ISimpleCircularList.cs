@@ -6,6 +6,6 @@
     {
         void AddItem(T item);
 
-        T IterateItem();
+        T GetOrderedItem();
     }
 }
