@@ -24,7 +24,7 @@ namespace MainApp
 
             if (strategy.IsOutOfMap(newX, strategy.Plateau.X) || strategy.IsCollisionCase(rower))
             {
-                Console.WriteLine("This move cannot apply. Id: {0}  X: {1}  Y: {2}", rower.Id, rower.X, rower.Y);
+                this.ErrorMessage(rower);
             }
             else
             {

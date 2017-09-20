@@ -45,6 +45,8 @@
             var rowerCommands = this.ConvertToRowerCommands(commands, orderedtRower, strategy);
 
             rowerCommands.ForEach(x => x.Apply());
+
+            orderedtRower.GetStatus();
         }
 
         public void DisplayRowers()

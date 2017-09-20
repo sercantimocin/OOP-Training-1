@@ -24,6 +24,11 @@
             return this.stateName;
         }
 
+        protected internal void ErrorMessage(IRower rower)
+        {
+            Console.WriteLine("This move cannot apply. Id: {0}  X: {1}  Y: {2} Direction: {3}", rower.Id, rower.X, rower.Y, this.GetName());
+        }
+
         public static DirectionState CreateCommand(string stateChar)
         {
             Type type = Assembly.GetAssembly(typeof(DirectionState))
